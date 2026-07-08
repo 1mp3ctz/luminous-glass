@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pulse — luminous-glass demo</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Doto:wght@700&display=swap');</style>
+</head><body>
+<!-- LG-DEMO-START -->
+<style>
+  :root{
+    --lg-black:#0B0B0C; --lg-ink:#131316; --lg-coal:#1C1C20; --lg-graphite:#26262B;
+    --lg-olive:#23271C; --lg-white:#fff; --lg-silver:#ECECEA; --lg-sage:#E8EDE4;
+    --lg-lime:#C8F04B; --lg-green:#3ED47E; --lg-acid:#F2EF3F; --lg-orange:#FF7A33;
+    --lg-bad:#FF4B4B; --lg-warn:#F2C83F; --lg-violet:#7A4BF0;
+    --lg-dim:rgba(255,255,255,.62); --lg-cap:rgba(255,255,255,.45);
+    --lg-ink-dim:rgba(16,16,19,.55); --lg-ink-cap:rgba(16,16,19,.42);
+    --lg-glass:rgba(255,255,255,.12); --lg-gb:rgba(255,255,255,.22); --lg-hair:rgba(255,255,255,.15);
+    --lg-r:24px; --lg-rl:28px;
+    --lg-ease:cubic-bezier(.22,.8,.28,1);
+    --lg-spectrum:linear-gradient(90deg,#FF5A3C,#FFA13C 20%,#F2EF3F 40%,#3ED47E 60%,#3FBBFF 80%,#7A4BF0);
+    --f-ui:'Outfit',ui-rounded,-apple-system,'SF Pro Rounded',system-ui,sans-serif;
+    --f-dot:'Doto',ui-rounded,monospace;
+  }
+  *{margin:0;box-sizing:border-box}
+  .lg-page{
+    min-height:100vh; color:#fff; font-family:var(--f-ui);
+    background:
+      radial-gradient(1100px 720px at 82% -12%, rgba(200,240,75,.15), transparent 60%),
+      radial-gradient(820px 640px at -8% 112%, rgba(31,107,255,.10), transparent 55%),
+      var(--lg-black);
+    padding:clamp(20px,4vw,56px); max-width:1240px; margin:0 auto;
+  }
+  /* reveals */
+  .rv{opacity:0; transform:translateY(14px); filter:blur(12px); animation:in .9s var(--lg-ease) forwards}
+  .rv.d1{animation-delay:.12s}.rv.d2{animation-delay:.24s}.rv.d3{animation-delay:.36s}.rv.d4{animation-delay:.48s}
+  @keyframes in{to{opacity:1;transform:none;filter:blur(0)}}
+
+  /* header */
+  header{display:flex; align-items:center; gap:14px; margin-bottom:clamp(28px,5vw,64px)}
+  .logo{display:flex; align-items:center; gap:10px; font-weight:700; font-size:19px; letter-spacing:-.01em}
+  .logo i{width:12px;height:12px;border-radius:50%;background:var(--lg-lime);
+    box-shadow:0 0 18px rgba(200,240,75,.8); position:relative}
+  .logo i::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px solid var(--lg-lime);
+    opacity:.5;animation:pulse 2.2s var(--lg-ease) infinite}
+  @keyframes pulse{from{transform:scale(.8);opacity:.5}to{transform:scale(1.5);opacity:0}}
+  nav{margin-left:auto; display:flex; gap:8px}
+  .pill{font:inherit;font-size:14px;font-weight:500;padding:10px 18px;border-radius:999px;border:none;cursor:pointer;
+    background:var(--lg-glass);color:var(--lg-dim);border:1px solid var(--lg-gb);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    transition:transform .24s var(--lg-ease)}
+  .pill:hover{transform:translateY(-1px)}
+  .pill.on{background:var(--lg-white);color:#101013;border-color:transparent}
+  .avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#F9B8DC,#7A4BF0);
+    border:1px solid var(--lg-gb)}
+
+  /* hero */
+  .hero{display:grid; grid-template-columns:1.05fr .95fr; gap:28px; align-items:end; margin-bottom:34px}
+  @media(max-width:900px){.hero{grid-template-columns:1fr}}
+  h1{font-size:clamp(30px,4.6vw,52px); font-weight:400; line-height:1.06; letter-spacing:-.02em;
+    color:var(--lg-dim); max-width:16ch}
+  h1 b{color:#fff; font-weight:700}
+  .stat{margin-top:26px; display:flex; align-items:flex-start; gap:14px}
+  .stat .n{font-size:clamp(76px,11vw,132px); font-weight:300; line-height:.92; letter-spacing:-.035em}
+  .stat .side{display:grid; gap:9px; padding-top:16px}
+  .unit{font-size:15px; font-weight:500; color:var(--lg-cap)}
+  .delta{font-size:13px; font-weight:600; padding:5px 11px; border-radius:999px; width:max-content;
+    background:rgba(62,212,126,.2); color:var(--lg-green)}
+  .cap{font-size:13px; color:var(--lg-cap); margin-top:12px; max-width:34ch}
+
+  /* glass chart card */
+  .glass{backdrop-filter:blur(32px); -webkit-backdrop-filter:blur(32px);
+    background:var(--lg-glass); border:1px solid var(--lg-gb); border-radius:var(--lg-rl);
+    padding:24px; box-shadow:0 12px 40px rgba(0,0,0,.22)}
+  .glass h3{font-size:15px; font-weight:500; display:flex; justify-content:space-between; align-items:center;
+    padding-bottom:14px; border-bottom:1px solid var(--lg-hair); margin-bottom:14px}
+  .glass h3 span{font-size:12px; color:var(--lg-cap); font-weight:400}
+  .sq{position:relative}
+  .sq svg{width:100%; height:auto; display:block}
+  .tip{position:absolute; left:64%; top:6%; background:var(--lg-graphite); border:1px solid var(--lg-gb);
+    border-radius:14px; padding:8px 12px; line-height:1.25; transform:translateX(-50%)}
+  .tip b{font-size:14px; display:block}
+  .tip span{font-size:11px; color:var(--lg-cap)}
+  .ticks{display:flex; gap:6px; margin-top:14px}
+  .ticks i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.2)}
+  .ticks i.on{background:var(--lg-lime)}
+
+  /* bento */
+  .bento{display:grid; grid-template-columns:repeat(12,1fr); gap:14px; margin-bottom:34px}
+  .b-pair{grid-column:span 4; position:relative; display:grid; gap:12px}
+  .b-batt{grid-column:span 4}
+  .b-week{grid-column:span 4}
+  @media(max-width:900px){.b-pair,.b-batt,.b-week{grid-column:span 12}}
+  .card{border-radius:var(--lg-r); padding:22px}
+  .card .t{font-size:14px; font-weight:500; display:flex; justify-content:space-between}
+  .card .t .ar{opacity:.45}
+  .card .v{font-size:32px; font-weight:700; letter-spacing:-.02em; margin:12px 0 4px}
+  .card .c{font-size:12.5px; opacity:.55}
+  .card.lime{background:var(--lg-lime); color:#131300; position:relative; overflow:hidden}
+  .card.lime::after{content:"";position:absolute; right:-30%; top:-45%; width:80%; aspect-ratio:1; border-radius:50%;
+    background:repeating-radial-gradient(circle at center, rgba(0,0,0,.09) 0 1.5px, transparent 1.5px 24px)}
+  .card.black{background:var(--lg-coal); color:#fff; position:relative; overflow:hidden}
+  .card.black::after{content:"";position:absolute; right:-25%; bottom:-50%; width:75%; aspect-ratio:1; border-radius:50%;
+    background:repeating-radial-gradient(circle at center, rgba(255,255,255,.06) 0 1.5px, transparent 1.5px 24px)}
+  .card.white{background:var(--lg-white); color:#101013}
+  .card.gray{background:var(--lg-silver); color:#101013}
+  .bridge{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:2;
+    width:54px; height:54px; border-radius:50%; border:6px solid var(--lg-black);
+    background:var(--lg-graphite); color:#fff; font-size:17px; cursor:pointer}
+  /* gauge */
+  .gauge-wrap{display:flex; gap:20px; align-items:center}
+  .gauge{width:116px; height:116px}
+  .g-list{display:grid; gap:8px; font-size:13px; color:var(--lg-ink-dim)}
+  .g-list b{color:#101013; font-weight:600}
+  /* forest */
+  .forest{display:flex; align-items:flex-end; gap:4px; height:92px; margin-top:16px}
+  .forest i{flex:1; border-radius:2px; background:rgba(16,16,19,.18)}
+  .forest i.hot{background:var(--lg-orange)}
+  .wk{display:flex; justify-content:space-between; font-size:11px; color:var(--lg-ink-cap); margin-top:8px}
+
+  /* live meter strip */
+  .meter{display:flex; align-items:center; gap:22px; margin-bottom:34px; padding:20px 26px}
+  .dotnum{font-family:var(--f-dot); font-weight:700; font-size:clamp(40px,6vw,64px); line-height:1; color:var(--lg-lime)}
+  .dotnum.masked{font-family:var(--f-ui); font-weight:700;
+    -webkit-mask-image:radial-gradient(circle, #000 42%, transparent 45%);
+    -webkit-mask-size:7px 7px; mask-image:radial-gradient(circle, #000 42%, transparent 45%); mask-size:7px 7px}
+  .meter .lab{display:grid; gap:4px}
+  .meter .lab b{font-size:15px; font-weight:500}
+  .meter .lab span{font-size:12.5px; color:var(--lg-cap)}
+  .meter .spacer{margin-left:auto; display:flex; gap:8px}
+
+  /* light split section */
+  .light{background:var(--lg-sage); color:#101013; border-radius:var(--lg-rl); padding:clamp(22px,3.5vw,40px);
+    margin-bottom:34px}
+  .light h2{font-size:clamp(22px,3vw,30px); font-weight:400; letter-spacing:-.015em; color:var(--lg-ink-dim)}
+  .light h2 b{color:#101013; font-weight:700}
+  .l-grid{display:grid; grid-template-columns:repeat(12,1fr); gap:14px; margin-top:22px}
+  .l-score{grid-column:span 5}.l-target{grid-column:span 4}.l-months{grid-column:span 3}
+  @media(max-width:900px){.l-score,.l-target,.l-months{grid-column:span 12}}
+  .score-num{font-size:64px; font-weight:300; letter-spacing:-.03em; line-height:1}
+  .score-num small{font-size:15px; font-weight:500; color:var(--lg-ink-cap)}
+  .spectrum{height:24px; border-radius:999px; background:var(--lg-spectrum); position:relative; margin:18px 0 8px}
+  .spectrum i{position:absolute; top:-7px; width:2.5px; height:38px; border-radius:2px; background:#101013; left:86%}
+  .scale{display:flex; justify-content:space-between; font-size:11px; color:var(--lg-ink-cap)}
+  .progress{height:22px; border-radius:999px; margin:20px 0 10px; position:relative;
+    background-image:repeating-linear-gradient(135deg, rgba(16,16,19,.16) 0 4px, transparent 4px 9px)}
+  .progress i{display:block; height:100%; width:64%; border-radius:999px; background:var(--lg-lime); position:relative}
+  .progress i::after{content:"⋮"; position:absolute; right:-2px; top:50%; transform:translateY(-50%);
+    width:30px; height:30px; border-radius:50%; background:var(--lg-lime); border:3px solid rgba(16,16,19,.35);
+    display:grid; place-items:center; color:#131300; font-size:12px}
+  .months{display:flex; gap:6px; flex-wrap:wrap}
+  .months span{padding:8px 12px; border-radius:12px; background:rgba(16,16,19,.06); font-size:12px; color:var(--lg-ink-dim)}
+  .months .sel{background:var(--lg-ink); color:#fff; position:relative}
+  .months .sel::after{content:""; position:absolute; inset:auto 8px 4px 8px; height:3px; border-radius:2px; background:var(--lg-lime)}
+  .rows{margin-top:16px}
+  .row{display:flex; align-items:center; gap:10px; padding:11px 0; font-size:13.5px; color:var(--lg-ink-dim);
+    border-bottom:1px solid rgba(16,16,19,.1)}
+  .row:last-child{border:none}
+  .row .dot{width:7px;height:7px;border-radius:50%}
+  .row b{margin-left:auto; color:#101013; font-weight:600}
+  .toggle{width:46px;height:26px;border-radius:999px;background:var(--lg-lime);position:relative;margin-left:auto}
+  .toggle::after{content:"";position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:#fff}
+
+  /* AI bar */
+  .ai{display:grid; gap:12px; margin-bottom:26px}
+  .askbar{display:flex; align-items:center; gap:14px; padding:16px 22px; border-radius:999px;
+    background:var(--lg-glass); border:1px solid var(--lg-gb); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px)}
+  .askbar .w{width:36px;height:36px;border-radius:50%;background:var(--lg-lime);color:#131300;
+    display:grid;place-items:center;font-size:15px; box-shadow:0 0 30px rgba(200,240,75,.4)}
+  .askbar span{color:var(--lg-cap); font-size:15px}
+  .chips{display:flex; gap:8px; flex-wrap:wrap}
+  .chips i{font-style:normal; font-size:12.5px; padding:8px 13px; border-radius:999px;
+    background:rgba(255,255,255,.08); border:1px solid var(--lg-hair); color:var(--lg-dim)}
+  footer{font-size:12px; color:var(--lg-cap); display:flex; gap:8px; align-items:center}
+  footer i{width:8px;height:8px;border-radius:50%;background:var(--lg-lime);font-style:normal}
+</style>
+
+<div class="lg-page">
+  <header class="rv">
+    <div class="logo"><i></i> Pulse</div>
+    <nav>
+      <button class="pill on">Today</button>
+      <button class="pill">Week</button>
+      <button class="pill">Insights</button>
+    </nav>
+    <div class="avatar" aria-hidden="true"></div>
+  </header>
+
+  <section class="hero">
+    <div class="rv d1">
+      <h1>Good evening, <b>here's what your home produced today.</b></h1>
+      <div class="stat">
+        <div class="n">48.2</div>
+        <div class="side">
+          <span class="unit">kWh</span>
+          <span class="delta">+12% ↗</span>
+        </div>
+      </div>
+      <p class="cap">That's 5.1 kWh more than yesterday — your best Sunday this summer!</p>
+    </div>
+
+    <div class="glass rv d2">
+      <h3>Production curve <span>Today · 5 min steps</span></h3>
+      <div class="sq">
+        <svg viewBox="0 0 340 130" fill="none" aria-hidden="true">
+          <path d="M6 112 C30 108, 44 96, 62 84 S98 42, 122 38 S158 20, 186 26 S232 58, 258 74 S310 104, 332 108"
+                stroke="#C8F04B" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="222" cy="46" r="6" fill="#C8F04B"/>
+          <g stroke="rgba(255,255,255,.12)" stroke-dasharray="3 6">
+            <line x1="6" y1="40" x2="332" y2="40"/><line x1="6" y1="76" x2="332" y2="76"/>
+          </g>
+        </svg>
+        <div class="tip"><b>6.8 kW</b><span>13:40 — peak sun</span></div>
+      </div>
+      <div class="ticks">
+        <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+    </div>
+  </section>
+
+  <section class="bento">
+    <div class="b-pair rv d2">
+      <div class="card lime">
+        <div class="t">Sold to grid <span class="ar">↗</span></div>
+        <div class="v">€ 341.62</div>
+        <div class="c">€ 44.30 more than this time last month.</div>
+      </div>
+      <button class="bridge" aria-label="details">↗</button>
+      <div class="card black">
+        <div class="t">Drawn from grid <span class="ar">↗</span></div>
+        <div class="v">€ 128.75</div>
+        <div class="c">Mostly the night heat-pump cycle.</div>
+      </div>
+    </div>
+
+    <div class="b-batt rv d3">
+      <div class="card white" style="height:100%">
+        <div class="t">Home battery <span class="ar">↗</span></div>
+        <div class="gauge-wrap" style="margin-top:14px">
+          <svg class="gauge" viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="60" cy="60" r="50" stroke="rgba(16,16,19,.12)" stroke-width="10" fill="none"/>
+            <circle cx="60" cy="60" r="50" stroke="#C8F04B" stroke-width="10" fill="none"
+              stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="72.2"
+              transform="rotate(-90 60 60)"/>
+            <text x="60" y="67" text-anchor="middle" fill="#101013"
+              font-family="Outfit,ui-rounded,sans-serif" font-size="25" font-weight="600">77%</text>
+          </svg>
+          <div class="g-list">
+            <div>Charging <b>+2.1 kW</b></div>
+            <div>Full in <b>1 h 24 m</b></div>
+            <div>Reserve <b>20%</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="b-week rv d3">
+      <div class="card gray" style="height:100%">
+        <div class="t">This week <span class="ar">↗</span></div>
+        <div class="forest" aria-hidden="true">
+          <i style="height:44%"></i><i style="height:58%"></i><i style="height:36%"></i><i style="height:64%"></i>
+          <i style="height:52%"></i><i style="height:70%"></i><i class="hot" style="height:92%"></i><i style="height:60%"></i>
+          <i style="height:47%"></i><i style="height:66%"></i><i style="height:41%"></i><i style="height:74%"></i>
+          <i style="height:56%"></i><i style="height:62%"></i><i style="height:38%"></i><i style="height:69%"></i>
+          <i style="height:50%"></i><i style="height:78%"></i><i style="height:57%"></i><i style="height:63%"></i>
+        </div>
+        <div class="wk"><span>mon</span><span>tue</span><span>wed</span><span>thu</span><span>fri</span><span>sat</span><span class="sel">sun</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="glass meter rv d3">
+    <div class="dotnum">3.4</div>
+    <div class="lab"><b>Live output</b><span>kW · east + south arrays</span></div>
+    <div class="spacer">
+      <button class="pill">Panels</button>
+      <button class="pill on">Optimize</button>
+    </div>
+  </section>
+
+  <section class="light rv d4">
+    <h2>Efficiency report, <b>June 2026.</b></h2>
+    <div class="l-grid">
+      <div class="card white l-score">
+        <div class="t">Home efficiency score</div>
+        <div style="margin-top:14px" class="score-num">86 <small>Excellent</small></div>
+        <div class="spectrum" aria-hidden="true"><i></i></div>
+        <div class="scale"><span>20</span><span>55</span><span>70</span><span>90</span></div>
+      </div>
+      <div class="card white l-target">
+        <div class="t">Monthly target</div>
+        <div class="progress" aria-hidden="true"><i></i></div>
+        <div class="c" style="opacity:.6">€ 400 of € 620 — this is € 96 ahead of plan!</div>
+        <div class="rows">
+          <div class="row"><span class="dot" style="background:#C8F04B"></span>Solar yield <b>1,204 kWh</b></div>
+          <div class="row"><span class="dot" style="background:#101013"></span>Consumption <b>879 kWh</b></div>
+          <div class="row"><span class="dot" style="background:rgba(16,16,19,.35)"></span>Night mode <div class="toggle" role="switch" aria-checked="true"></div></div>
+        </div>
+      </div>
+      <div class="card white l-months">
+        <div class="t">Period</div>
+        <div class="months" style="margin-top:14px">
+          <span>jan</span><span>feb</span><span>mar</span><span>apr</span><span>may</span><span class="sel">jun</span>
+        </div>
+        <div class="c" style="margin-top:16px; opacity:.6">Best month since your panels went live.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ai rv d4">
+    <div class="askbar"><div class="w">✦</div><span>Ask Pulse anything about your home…</span></div>
+    <div class="chips"><i>Top producer today?</i><i>Why did draw spike at 02:00?</i><i>Sell more to the grid?</i></div>
+  </section>
+
+  <footer class="rv d4"><i></i> Pulse — a fictional product · built with the luminous-glass skill · no real data</footer>
+</div>
+<!-- LG-DEMO-END -->
+</body></html>

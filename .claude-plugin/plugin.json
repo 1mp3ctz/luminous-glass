@@ -1,0 +1,24 @@
+{
+  "name": "luminous-glass",
+  "description": "A codified 'atmospheric glass' UI design genre — dark/light dual-mode surfaces, frosted glass over photography, one luminous accent per project, giant hero numerals, dot-matrix data textures, and editorial device presentation. Web tokens + components, a SwiftUI adapter, art-direction guidance, and a calibration moodboard.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Viktor"
+  },
+  "homepage": "https://github.com/1mp3ctz/luminous-glass",
+  "repository": "https://github.com/1mp3ctz/luminous-glass",
+  "license": "MIT",
+  "keywords": [
+    "design",
+    "design-system",
+    "ui",
+    "frontend",
+    "css",
+    "swiftui",
+    "glassmorphism",
+    "skill"
+  ],
+  "skills": [
+    "./skills/"
+  ]
+}

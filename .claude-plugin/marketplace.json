@@ -1,0 +1,26 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "luminous-glass",
+  "description": "The luminous-glass design skill — a codified atmospheric-glass UI genre for Claude Code.",
+  "owner": {
+    "name": "Viktor"
+  },
+  "plugins": [
+    {
+      "name": "luminous-glass",
+      "source": "./",
+      "description": "A codified 'atmospheric glass' UI design genre — dark/light dual-mode surfaces, frosted glass over photography, one luminous accent per project, giant hero numerals, dot-matrix data textures, and editorial device presentation.",
+      "version": "1.0.0",
+      "license": "MIT",
+      "category": "design",
+      "keywords": [
+        "design",
+        "design-system",
+        "ui",
+        "frontend",
+        "css",
+        "swiftui"
+      ]
+    }
+  ]
+}

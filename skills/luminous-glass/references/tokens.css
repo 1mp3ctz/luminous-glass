@@ -1,0 +1,178 @@
+/* ============================================================
+   LUMINOUS-GLASS DESIGN TOKENS
+   Derived from the luminous-glass genre study.
+   Values trace to study/corpus.md (palette stats + canon rules).
+   Usage: paste into your global stylesheet, or mirror via the
+   Tailwind v4 @theme block at the bottom. $0 fonts (Google).
+   ============================================================ */
+
+/* ---- Fonts (free equivalents of the observed type voices) ----
+   House rounded grotesque  → Outfit (alt: Poppins)
+   Noir-fintech tight       → Inter
+   Dot-matrix data/display  → Doto (alt: Handjet)
+   Editorial serif accent   → Instrument Serif (italic)
+   Mono IDs/specs           → JetBrains Mono
+   Import (pick what you use):
+   @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Inter:wght@400;500;700&family=Doto:wght@400;700&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap');
+---------------------------------------------------------------- */
+
+:root {
+  /* ---------- NEUTRALS · noir pole (canon #1) ---------- */
+  --lg-black:    #0B0B0C;   /* base noir — never pure #000 (anti-pattern) */
+  --lg-ink:      #131316;
+  --lg-coal:     #1C1C20;   /* card on noir */
+  --lg-graphite: #26262B;   /* raised card / chip on noir */
+  --lg-slate:    #33333A;   /* borders-as-surface on noir */
+  /* domain-tinted darks (canon #3 accent-follows-domain) */
+  --lg-olive:    #23271C;   /* enterprise/retail dark (lime partner) */
+  --lg-olive-2:  #2E3424;
+  --lg-forest:   #1B251F;   /* sensors/health dark (green partner) */
+  --lg-petrol:   #17232B;   /* defense/ops dark (orange partner) */
+  --lg-navy:     #101623;   /* fintech noir (blue/violet partner) */
+
+  /* ---------- NEUTRALS · light pole (canon #1) ---------- */
+  --lg-white:  #FFFFFF;
+  --lg-paper:  #F4F4F2;
+  --lg-silver: #ECECEA;
+  --lg-sage:   #E8EDE4;    /* the modern-era light base (green-tinted) */
+  --lg-sage-2: #DDE4D7;
+  --lg-cream:  #F1EBE2;    /* warm latte mode (lifestyle/hospitality) */
+  --lg-latte:  #E7DDD0;
+
+  /* ---------- TEXT ---------- */
+  --lg-text-on-dark:      #FFFFFF;
+  --lg-text-dim-on-dark:  rgba(255,255,255,.62);  /* two-tone partner */
+  --lg-text-on-light:     #101013;
+  --lg-text-dim-on-light: rgba(16,16,19,.55);
+  --lg-caption-on-dark:   rgba(255,255,255,.45);
+  --lg-caption-on-light:  rgba(16,16,19,.42);
+
+  /* ---------- ACCENTS (canon #2/#3: one family per project) ---------- */
+  --lg-lime:    #C8F04B;   /* house default: retail/AI/eco/tech */
+  --lg-green:   #3ED47E;   /* money-good, glucose, growth */
+  --lg-acid:    #F2EF3F;   /* acid yellow: enterprise data (×black×white) */
+  --lg-orange:  #FF7A33;   /* thermal: security/defense/energy/breath */
+  --lg-coral:   #FF5A3C;
+  --lg-magenta: #F2379B;   /* emotional: reminders/personal/intimate */
+  --lg-pink:    #F9B8DC;
+  --lg-blue:    #1F6BFF;   /* infra/enterprise electric */
+  --lg-sky:     #3FBBFF;
+  --lg-violet:  #7A4BF0;
+  --lg-teal:    #2FD4C8;   /* aero/infra secondary */
+
+  /* pastel category-coding (canon #4 — organization UIs only) */
+  --lg-p-pink:   #F6D7E4;
+  --lg-p-lilac:  #E3DBF6;
+  --lg-p-powder: #D9E7F5;
+  --lg-p-butter: #F6EFC8;
+  --lg-p-mint:   #DDF0DC;
+
+  /* status semantics (canon #17) */
+  --lg-good: #3ED47E;
+  --lg-bad:  #FF4B4B;
+  --lg-warn: #F2C83F;
+
+  /* score spectrum (canon #3 — scores ONLY) */
+  --lg-spectrum: linear-gradient(90deg,#FF5A3C 0%,#FFA13C 20%,#F2EF3F 40%,#3ED47E 60%,#3FBBFF 80%,#7A4BF0 100%);
+
+  /* ---------- ATMOSPHERE (canon #2/#10: backgrounds never dead) ---------- */
+  --lg-glow-magenta: radial-gradient(closest-side, #5C1038 0%, #C22579 35%, rgba(242,55,155,.35) 65%, transparent 100%);
+  --lg-glow-green:   radial-gradient(closest-side, rgba(62,212,126,.85) 0%, rgba(62,212,126,.25) 55%, transparent 100%);
+  --lg-glow-orange:  radial-gradient(closest-side, rgba(255,122,51,.9) 0%, rgba(255,90,60,.3) 55%, transparent 100%);
+  --lg-glow-blue:    radial-gradient(closest-side, rgba(63,187,255,.8) 0%, rgba(31,107,255,.25) 55%, transparent 100%);
+  --lg-tint-noir-blue:  #10121D;  /* tinted near-blacks: glow-over-noir */
+  --lg-tint-noir-red:   #1D1112;
+  --lg-tint-noir-yellow:#1B1A0F;
+  --lg-tint-noir-teal:  #0F1A1A;
+  --lg-grad-announce: linear-gradient(160deg,#F8B4A0 0%,#C9B8E8 55%,#7FA8E8 100%); /* full-bleed announcement */
+  --lg-grad-aurora:   linear-gradient(140deg,#2FD4C8 0%,#F1EBE2 45%,#FF9A5C 100%); /* aurora ribbon */
+  --lg-grad-note:     linear-gradient(135deg,#7FD4CF 0%,#F0A868 55%,#B69CE3 100%);
+
+  /* ---------- GLASS (canon #8, the glass-screen recipe) ---------- */
+  --lg-glass-blur:      32px;              /* range 20–40 */
+  --lg-glass-tint:      rgba(255,255,255,.12);
+  --lg-glass-border:    rgba(255,255,255,.22);
+  --lg-glass-hairline:  rgba(255,255,255,.15);
+  --lg-glass-dark:      rgba(11,11,12,.40); /* dark glass on light photos */
+  --lg-glass-dark-border: rgba(255,255,255,.14);
+
+  /* ---------- GEOMETRY (canon #13) ---------- */
+  --lg-r-chip: 12px;
+  --lg-r-card: 24px;      /* 20–28 observed */
+  --lg-r-card-lg: 28px;
+  --lg-r-pill: 999px;
+
+  /* ---------- ELEVATION (anti-pattern: no hard shadows) ---------- */
+  --lg-shadow-soft:  0 24px 60px rgba(0,0,0,.35);
+  --lg-shadow-float: 0 12px 40px rgba(0,0,0,.22);
+  --lg-shadow-glow-lime:    0 0 44px rgba(200,240,75,.35);
+  --lg-shadow-glow-magenta: 0 0 44px rgba(242,55,155,.35);
+
+  /* ---------- TYPE (canon #5/#6/#7) ---------- */
+  --lg-font-ui:      'Outfit','Poppins',system-ui,sans-serif;
+  --lg-font-display: 'Outfit','Poppins',system-ui,sans-serif;
+  --lg-font-tight:   'Inter',system-ui,sans-serif;      /* noir fintech */
+  --lg-font-dot:     'Doto','Handjet',monospace;        /* dot-matrix voice */
+  --lg-font-serif:   'Instrument Serif',Georgia,serif;  /* italic accents only */
+  --lg-font-mono:    'JetBrains Mono',ui-monospace,monospace;
+
+  --lg-fs-hero:    clamp(64px, 12vw, 148px);  /* giant numeral */
+  --lg-fs-display: clamp(34px, 5.5vw, 64px);
+  --lg-fs-h2:      clamp(24px, 3vw, 36px);
+  --lg-fs-value:   28px;                       /* card value */
+  --lg-fs-body:    16px;
+  --lg-fs-caption: 13px;
+  --lg-fs-micro:   11px;
+
+  --lg-w-thin: 300;   /* measures/scores (canon #6) */
+  --lg-w-reg:  400;
+  --lg-w-med:  500;
+  --lg-w-bold: 700;   /* money + payoff words */
+
+  --lg-track-display: -0.02em;
+  --lg-leading-display: 1.04;
+
+  /* ---------- MOTION (canon #20) ---------- */
+  --lg-ease: cubic-bezier(.22,.8,.28,1);
+  --lg-t-fast: 240ms;
+  --lg-t-slow: 900ms;   /* orbit/parallax beats 600–1200ms */
+  --lg-focus-blur: 12px; /* blur→0 focus-pull transitions */
+}
+
+/* ---------- HATCH & ENGRAVE TEXTURES (canon #9) ---------- */
+.lg-hatch {  /* striped progress track / texture patch */
+  background-image: repeating-linear-gradient(135deg,
+    rgba(0,0,0,.28) 0 4px, transparent 4px 9px);
+}
+.lg-engrave { position: relative; overflow: hidden; }
+.lg-engrave::after { /* concentric-ring deboss on color-field cards */
+  content:""; position:absolute; inset:-40% -20% auto auto;
+  width:75%; aspect-ratio:1; border-radius:50%; pointer-events:none;
+  background: repeating-radial-gradient(circle at center,
+    rgba(0,0,0,.10) 0 1.5px, transparent 1.5px 26px);
+}
+.lg-dotgrid { /* halftone texture patch */
+  background-image: radial-gradient(rgba(0,0,0,.22) 1.3px, transparent 1.3px);
+  background-size: 7px 7px;
+}
+
+/* ============================================================
+   TAILWIND v4 MIRROR — drop into your CSS entry after @import "tailwindcss";
+   ============================================================
+@theme {
+  --color-lg-black:#0B0B0C; --color-lg-ink:#131316; --color-lg-coal:#1C1C20;
+  --color-lg-graphite:#26262B; --color-lg-slate:#33333A;
+  --color-lg-olive:#23271C; --color-lg-forest:#1B251F; --color-lg-petrol:#17232B; --color-lg-navy:#101623;
+  --color-lg-white:#FFFFFF; --color-lg-paper:#F4F4F2; --color-lg-silver:#ECECEA;
+  --color-lg-sage:#E8EDE4; --color-lg-cream:#F1EBE2; --color-lg-latte:#E7DDD0;
+  --color-lg-lime:#C8F04B; --color-lg-green:#3ED47E; --color-lg-acid:#F2EF3F;
+  --color-lg-orange:#FF7A33; --color-lg-coral:#FF5A3C; --color-lg-magenta:#F2379B;
+  --color-lg-pink:#F9B8DC; --color-lg-blue:#1F6BFF; --color-lg-sky:#3FBBFF;
+  --color-lg-violet:#7A4BF0; --color-lg-teal:#2FD4C8;
+  --color-lg-good:#3ED47E; --color-lg-bad:#FF4B4B; --color-lg-warn:#F2C83F;
+  --font-lg-ui: Outfit, Poppins, system-ui, sans-serif;
+  --font-lg-dot: Doto, Handjet, monospace;
+  --font-lg-serif: "Instrument Serif", Georgia, serif;
+  --radius-lg-chip:12px; --radius-lg-card:24px; --radius-lg-card-lg:28px;
+}
+============================================================ */
